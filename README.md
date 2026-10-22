@@ -89,3 +89,8 @@ PYTHONPATH=src python -m cinema_catharsis.preflight /путь/к/видео.mp4 
 ## Локальный ИИ-анализ захваченных кадров и речи — v0.4
 
 [Инструкция](docs/AI_SCAN.md). Подключены **опциональные** модели CLIP для поиска визуальных кандидатов (алкоголь, табак, вейпинг) и Faster-Whisper для транскрипции захваченного аудио. После экспорта из [Live Capture](web/capture.html) можно установить пакет с опциями `pip install -e '.[vision,speech]'` и запустить `cinema-catharsis-scan capture_manifest.json --vision --audio captured_audio.webm --output report.json`. Без моделей команда формирует отчёт о доступных данных. Детекции — только гипотезы для проверки человеком, не доказательства пропаганды или основание для автоматического запрета монетизации. При ускорении ×10 возможны пропуски сцен и ошибки распознавания речи. Точность ещё не валидирована.
+
+
+## Экспорт отчётов: Excel, Google Таблицы, Google Документы — v0.5
+
+После создания JSON-отчёта запустите `cinema-catharsis-export report.json --output-dir exported`. Будут сформированы **Excel XLSX** (4 листа: Summary, Findings, Transcript, Limitations), четыре CSV для импорта в **Google Таблицы** и HTML-отчёт для копирования или импорта в **Google Документы**. Данные остаются локально; автоматической загрузки в Google Drive пока нет — для неё требуется отдельная авторизация Google OAuth. [Инструкция по экспорту](docs/EXPORTS.md).
