@@ -1,7 +1,7 @@
 """Explainable pre-upload policy evaluation; annotations are supplied by humans or external detectors."""
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from typing import Mapping
-import json
+import math
 
 CATEGORIES = frozenset({"alcohol", "tobacco", "nicotine", "violence", "other"})
 CONTEXTS = frozenset({"promotion", "neutral", "critical", "educational", "documentary", "fictional", "unknown"})
@@ -27,7 +27,7 @@ class Finding:
             raise ValueError("Unsupported channel")
         if not isinstance(self.start_ms, int) or not isinstance(self.end_ms, int) or self.start_ms < 0 or self.end_ms <= self.start_ms:
             raise ValueError("Invalid millisecond interval")
-        if not isinstance(self.confidence, (int, float)) or not 0 <= self.confidence <= 1:
+        if isinstance(self.confidence, bool) or not isinstance(self.confidence, (int, float)) or not math.isfinite(self.confidence) or not 0 <= self.confidence <= 1:
             raise ValueError("Invalid confidence")
         if not isinstance(self.evidence, str) or not self.evidence.strip() or len(self.evidence) > 2000:
             raise ValueError("Evidence must be nonempty and <= 2000 chars")
@@ -38,8 +38,10 @@ def evaluate(findings: list[Finding], policy: Mapping | None = None) -> dict:
     if policy:
         settings.update(policy)
     threshold = settings["min_confidence"]
-    if not isinstance(threshold, (int,float)) or not 0 <= threshold <= 1:
+    if isinstance(threshold, bool) or not isinstance(threshold, (int,float)) or not math.isfinite(threshold) or not 0 <= threshold <= 1:
         raise ValueError("Invalid threshold")
+    if not isinstance(settings["restricted_categories"], list):
+        raise ValueError("restricted_categories must be a list")
     restricted = set(settings["restricted_categories"])
     if not restricted.issubset(CATEGORIES):
         raise ValueError("Unknown restricted category")
@@ -76,8 +78,13 @@ def analyze_document(document: dict) -> dict:
     items = document.get("findings")
     if not isinstance(items, list) or len(items) > 10000:
         raise ValueError("findings must be a list of at most 10000 items")
+    if not all(isinstance(item, dict) for item in items):
+        raise ValueError("Every finding must be an object")
     findings = [Finding(**item) for item in items]
     result = evaluate(findings, document.get("policy"))
+    if not findings:
+        result["monetization"] = "not_assessed"
+        result["explanation"] = "No findings provided; absence of annotations is not proof of safe content."
     result["asset_id"] = document.get("asset_id")
     result["finding_count"] = len(findings)
     return result
