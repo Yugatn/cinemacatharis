@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cinema-catharsis"
-version = "0.4.0"
+version = "0.5.0"
 description = "Explainable pre-upload video annotations and monetization policy prototype"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -21,6 +21,7 @@ cinema-catharsis = "cinema_catharsis.cli:main"
 cinema-catharsis-preflight = "cinema_catharsis.preflight:main"
 cinema-catharsis-server = "cinema_catharsis.server:main"
 cinema-catharsis-scan = "cinema_catharsis.scan_capture:main"
+cinema-catharsis-export = "cinema_catharsis.export:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
