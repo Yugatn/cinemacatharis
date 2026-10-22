@@ -7,13 +7,13 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 
 | Workstream | Weight | Estimated completion | Contribution |
 |---|---:|---:|---:|
-| Transparent taxonomy, composition and uncertainty metrics | 20% | 55% | 11% |
+| Transparent taxonomy, composition and uncertainty metrics | 20% | 60% | 12% |
 | Text and browser extension prototype | 15% | 45% | 6.75% |
-| Image, audio and video pipeline integration | 20% | 35% | 7% |
+| Image, audio and video pipeline integration | 20% | 38% | 7.6% |
 | Desktop and mobile application distribution | 15% | 15% | 2.25% |
 | Parent preferences, privacy and family experience | 15% | 20% | 3% |
 | Testing, security, calibration and accessibility | 15% | 15% | 2.25% |
-| **Overall estimated readiness** | **100%** | | **32.25%** |
+| **Overall estimated readiness** | **100%** | | **33.85%** |
 
 ## Milestones
 - [x] Content composition with coverage and unknown intervals (research implementation).
@@ -23,9 +23,9 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 - [x] Family link launcher prototype.
 - [x] Initial lexical-engine unit tests and CI workflow committed.
 - [ ] Verify CI runs and fix failures.
-- [x] Add common evidence normalization schema and screen-capture adapter (integration foundation only).\n- [ ] Connect all text, image, audio, OCR and video detectors to the common schema and review UI.
+- [x] Add common evidence normalization schema and screen-capture adapter (integration foundation only).\n- [x] Add lexical-to-evidence adapter for reports with explicit character offsets.\n- [ ] Upgrade browser lexical engine to emit offsets; current 1.0 output is not yet compatible.\n- [ ] Connect all text, image, audio, OCR and video detectors to the common schema and review UI.
 - [ ] Independently validate classifiers with representative annotated data.
 - [ ] Build installable desktop and mobile browser applications.
 - [ ] Complete security, accessibility, performance and child-privacy audits.
 
-**Important:** 32.25% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
+**Important:** 33.85% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
