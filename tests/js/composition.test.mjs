@@ -22,3 +22,17 @@ test("same engine in web and extension",async()=>{
   const ext=await readFile(new URL("../../extension/composition-core.js",import.meta.url),"utf8");
   assert.equal(src,ext);
 });
+
+test("reports exact character offsets and excerpts",()=>{
+ const text="До этого было вино, но это не реклама.";
+ const r=analyzeText(text);
+ const hit=r.categories.alcohol.examples[0];
+ assert.equal(text.slice(hit.start,hit.end),"вино");
+ assert.ok(hit.excerpt.includes("вино"));
+ assert.equal(r.schema_version,"lexical-composition-1.1");
+});
+test("offsets remain correct for Unicode and mixed case",()=>{
+ const text="🙂 ПИВО — обсуждение";
+ const hit=analyzeText(text).categories.alcohol.examples[0];
+ assert.equal(text.slice(hit.start,hit.end),"ПИВО");
+});
