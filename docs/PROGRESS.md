@@ -12,8 +12,8 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 | Image, audio and video pipeline integration | 20% | 40% | 8% |
 | Desktop and mobile application distribution | 15% | 15% | 2.25% |
 | Parent preferences, privacy and family experience | 15% | 20% | 3% |
-| Testing, security, calibration and accessibility | 15% | 15% | 2.25% |
-| **Overall estimated readiness** | **100%** | | **39%** |
+| Testing, security, calibration and accessibility | 15% | 25% | 3.75% |
+| **Overall estimated readiness** | **100%** | | **40.5%** |
 
 ## Milestones
 - [x] Content composition with coverage and unknown intervals (research implementation).
@@ -22,10 +22,10 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 - [x] Local source-media timestamp sampler and calibration formulas.
 - [x] Family link launcher prototype.
 - [x] Initial lexical-engine unit tests and CI workflow committed.
-- [ ] Verify CI runs and fix failures.
+- [x] Verify GitHub Actions browser lexical and Python test workflows passed on commit d53d266a6511d163ed252f4694ac6120610172fe.\n- [ ] Verify both workflows for the latest commit after subsequent changes.
 - [x] Add common evidence normalization schema and screen-capture adapter (integration foundation only).\n- [x] Add lexical-to-evidence adapter for reports with explicit character offsets.\n- [x] Upgrade web and Chromium lexical engines to lexical-composition-1.1 with text offsets and excerpts; tests committed.\n- [x] Show source excerpts and character offsets in the responsive browser text report.\n- [x] Integrate browser lexical output with local evidence-1.0 conversion and JSON export.\n- [ ] Connect image, audio, OCR and video detectors to the common browser review UI.
 - [ ] Independently validate classifiers with representative annotated data.
 - [ ] Build installable desktop and mobile browser applications.
 - [ ] Complete security, accessibility, performance and child-privacy audits.
 
-**Important:** 39% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
+**Important:** 40.5% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
