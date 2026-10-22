@@ -94,3 +94,8 @@ PYTHONPATH=src python -m cinema_catharsis.preflight /путь/к/видео.mp4 
 ## Экспорт отчётов: Excel, Google Таблицы, Google Документы — v0.5
 
 После создания JSON-отчёта запустите `cinema-catharsis-export report.json --output-dir exported`. Будут сформированы **Excel XLSX** (4 листа: Summary, Findings, Transcript, Limitations), четыре CSV для импорта в **Google Таблицы** и HTML-отчёт для копирования или импорта в **Google Документы**. Данные остаются локально; автоматической загрузки в Google Drive пока нет — для неё требуется отдельная авторизация Google OAuth. [Инструкция по экспорту](docs/EXPORTS.md).
+
+
+## Браузерный просмотр отчёта — v0.6
+
+Добавлен [просмотрщик отчётов](web/report.html) с таблицами обнаруженных признаков и расшифровки речи. Можно выбрать JSON-файл, посмотреть выводы, сохранить CSV для Google Таблиц и HTML для Google Документов без командной строки и без передачи данных на сервер. [Инструкция](docs/BROWSER_REPORT.md). Для запуска анализа и экспорта за один проход: `cinema-catharsis-scan capture_manifest.json --vision --audio captured_audio.webm --output report.json --exports-dir exported` (нужны опциональные модели). Сам запуск моделей из браузера пока не реализован.
