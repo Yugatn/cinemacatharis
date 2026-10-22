@@ -54,6 +54,7 @@ def main():
     parser.add_argument("--audio", help="Captured audio file for optional Whisper transcription")
     parser.add_argument("--threshold", type=float, default=0.55)
     parser.add_argument("--output", help="Save JSON report")
+    parser.add_argument("--exports-dir", help="Also export XLSX, CSV and HTML reports")
     args = parser.parse_args()
     result = scan_capture(args.manifest, vision=args.vision,
                           audio_path=args.audio, threshold=args.threshold)
@@ -62,6 +63,12 @@ def main():
         Path(args.output).write_text(output + "\n", encoding="utf-8")
     else:
         print(output)
+    if args.exports_dir:
+        from .export import export_csv, export_html, export_xlsx
+        directory = Path(args.exports_dir)
+        export_xlsx(result, directory / "cinema_catharsis.xlsx")
+        export_csv(result, directory)
+        export_html(result, directory / "cinema_catharsis.html")
 
 if __name__ == "__main__":
     main()
