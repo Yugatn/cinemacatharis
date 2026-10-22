@@ -20,6 +20,19 @@ $("analyze").addEventListener("click",()=>{
       table.append(tr);
     }
     target.append(table);
+    const evidenceTitle=document.createElement("h3"); evidenceTitle.textContent="Подтверждающие фрагменты"; target.append(evidenceTitle);
+    const evidenceList=document.createElement("ul");
+    for(const [category,data] of Object.entries(last.categories)) {
+      for(const hit of data.examples) {
+        const item=document.createElement("li");
+        item.textContent=category+" · символы "+hit.start+"–"+hit.end+": «"+hit.excerpt+"»";
+        evidenceList.append(item);
+      }
+    }
+    target.append(evidenceList);
+    const warning=document.createElement("p");
+    warning.textContent="Это словарные совпадения, а не подтверждение намерения, рекламы или вреда. Примеры ограничены десятью на категорию.";
+    target.append(warning);
     if (!Object.keys(last.categories).length) {
       const p=document.createElement("p");p.textContent="Словарных совпадений не найдено. Это не означает отсутствие какого-либо содержания.";target.append(p);
     }
