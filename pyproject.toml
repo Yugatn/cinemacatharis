@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cinema-catharsis"
+version = "0.10.0"
+description = "Explainable pre-upload video annotations and monetization policy prototype"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Proprietary / repository license applies"}
+dependencies = []
+
+[project.optional-dependencies]
+vision = ["pillow>=10", "transformers>=4.40,<5", "torch>=2.2"]
+speech = ["faster-whisper>=1.0"]
+
+
+[project.scripts]
+cinema-catharsis = "cinema_catharsis.cli:main"
+cinema-catharsis-preflight = "cinema_catharsis.preflight:main"
+cinema-catharsis-server = "cinema_catharsis.server:main"
+cinema-catharsis-scan = "cinema_catharsis.scan_capture:main"
+cinema-catharsis-export = "cinema_catharsis.export:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

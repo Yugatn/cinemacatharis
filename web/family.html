@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b2a"><meta name="description" content="Cinema Catharsis Family: семейный навигатор по выбранным родителями сайтам.">
+<title>Cinema Catharsis Family</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif}*{box-sizing:border-box}body{background:#101b2a;color:#f1f5f9;margin:0}main{max-width:780px;margin:auto;padding:20px 16px 80px}header{padding:12px 0 18px}h1{font-size:clamp(1.6rem,5vw,2.3rem);margin:8px 0}p{line-height:1.5;color:#cbd5e1}button,input,select{font:inherit;min-height:44px;border-radius:9px}button{background:#2763ba;color:white;border:0;padding:11px 16px;cursor:pointer}button.secondary{background:#334155}button:focus-visible,input:focus-visible{outline:3px solid #93c5fd}input{background:#0f172a;color:white;border:1px solid #64748b;padding:10px;width:100%}label{display:block;margin:12px 0 6px}section{background:#1e293b;padding:18px;border-radius:14px;margin:16px 0}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:1}ul{padding:0;list-style:none}li{padding:12px 0;border-bottom:1px solid #475569;overflow-wrap:anywhere}a{color:#93c5fd}small{color:#cbd5e1}.warning{border-left:4px solid #fbbf24;padding:10px;background:#293343}#parent{display:none}#parent.open{display:block}@media(max-width:460px){.row{display:block}.row>*{width:100%;margin:4px 0}}
+</style></head><body><main>
+<header><small>Исследовательский прототип • Без рекламы • Без аккаунта</small><h1>Синема Катарсис — Семья</h1><p>Семейный навигатор: ребёнок открывает только ссылки, заранее выбранные родителем в этом интерфейсе.</p></header>
+<section><h2>Семейная подборка</h2><p id="count"></p><ul id="sites"></ul><p id="empty" hidden>Список пуст. Добавьте сайты в настройках.</p></section>
+<section><h2>Настройки родителя</h2><p>Добавление и удаление ссылок доступно на этом устройстве. Настройки не синхронизируются с другими устройствами.</p>
+<button id="toggle" class="secondary" aria-expanded="false" aria-controls="parent">Показать настройки</button>
+<div id="parent"><label for="label">Название сайта</label><input id="label" maxlength="80" placeholder="Например, образовательный портал">
+<label for="url">Адрес HTTPS</label><input id="url" type="url" maxlength="2048" inputmode="url" placeholder="https://example.org">
+<div class="row"><button id="add">Добавить в подборку</button><button id="reset" class="secondary">Очистить список</button></div><p id="feedback" role="status"></p></div></section>
+<section><h2>Семейные принципы</h2><p>Рекомендуется совместно обсуждать увиденное, обращать внимание на контекст сцен и подбирать материалы с учётом возраста и индивидуальной чувствительности ребёнка.</p>
+<p class="warning"><strong>Важно:</strong> это навигатор, а не полноценный защищённый браузер или родительский контроль. Он не блокирует переходы по ссылкам внутри сайтов, другие приложения, поисковые системы и смену браузера. Кнопка настроек не защищена PIN-кодом. Не используйте его как единственную меру защиты ребёнка.</p>
+<p>Для системных ограничений используйте родительские настройки iOS/Android и семейный DNS-фильтр. Содержимое внешних сайтов здесь автоматически не проверяется.</p></section>
+<nav><a href="./report.html">Отчёты анализа</a> · <a href="./capture.html">Захват экрана (совместимость зависит от браузера)</a></nav>
+</main><script type="module" src="./family.js"></script></body></html>

@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"Cinema Catharsis — состав страницы","version":"0.1.0","description":"Добровольный локальный анализ текста текущей вкладки без блокировок и отправки данных.","permissions":["activeTab","scripting"],"action":{"default_popup":"popup.html"}}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "demo-001",
+  "findings": [
+    {
+      "category": "alcohol",
+      "context": "promotion",
+      "start_ms": 1000,
+      "end_ms": 3500,
+      "confidence": 0.94,
+      "evidence": "Explicit purchase invitation in sponsor segment",
+      "channel": "speech",
+      "commercial_signal": true,
+      "verified": true
+    },
+    {
+      "category": "tobacco",
+      "context": "documentary",
+      "start_ms": 5000,
+      "end_ms": 7000,
+      "confidence": 0.99,
+      "evidence": "Historical archival footage",
+      "channel": "visual",
+      "commercial_signal": false,
+      "verified": true
+    }
+  ]
+}
