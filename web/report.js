@@ -3,7 +3,8 @@ const $ = id => document.getElementById(id);
 let report = null;
 const columns = {
   findings: ["category","context","start_ms","end_ms","confidence","channel","commercial_signal","verified","evidence"],
-  transcript: ["start_ms","end_ms","text"]
+  transcript: ["start_ms","end_ms","text"],
+  observations: ["category","channel","timing_basis","start","end","confidence","confidence_calibrated","verified","method","evidence"]
 };
 function table(rows, target) {
   const node = $(target); node.replaceChildren();
@@ -21,6 +22,9 @@ function table(rows, target) {
   element.append(head,body); node.appendChild(element);
 }
 function rowsFor(name) {
+  if (name === "findings" && report.schema_version === "evidence-1.0") {
+    return [columns.observations,...(Array.isArray(report.observations) ? report.observations : []).map(item => columns.observations.map(key => item?.[key] ?? ""))];
+  }
   if (name === "findings") {
     return [columns.findings,...(Array.isArray(report.findings) ? report.findings : []).map(
       item => columns.findings.map(key => item?.[key] ?? ""))];
@@ -28,6 +32,9 @@ function rowsFor(name) {
   if (name === "transcript") {
     return [columns.transcript,...(Array.isArray(report.transcript?.segments) ? report.transcript.segments : []).map(
       item => columns.transcript.map(key => item?.[key] ?? ""))];
+  }
+  if(report.schema_version === "evidence-1.0") {
+    return [["Field","Value"],["Schema",report.schema_version],["Source",report.source],["Coverage",report.coverage],["Observations",report.observation_count],["Content safe","not_assessed"],["Promotion","not_assessed"]];
   }
   const assessment = report.assessment || {};
   return [["Field","Value"],...Object.entries({
@@ -69,9 +76,10 @@ $("file").addEventListener("change",async event => {
     const file = event.target.files?.[0];
     if (!file || file.size > 20_000_000) throw new Error("Файл отсутствует или больше 20 МБ");
     const parsed = JSON.parse(await file.text());
-    if (!parsed || typeof parsed !== "object" || !["scan-1.0"].includes(parsed.schema_version)) {
-      throw new Error("Ожидается отчёт scan-1.0");
+    if (!parsed || typeof parsed !== "object" || !["scan-1.0","evidence-1.0"].includes(parsed.schema_version)) {
+      throw new Error("Ожидается отчёт scan-1.0 или evidence-1.0");
     }
+    if(parsed.schema_version==="evidence-1.0" && (!Array.isArray(parsed.observations) || parsed.observations.length>10000)) throw new Error("Недопустимый список наблюдений");
     report = parsed; show();
   } catch (error) { $("message").textContent = "Ошибка: " + error.message; }
 });
