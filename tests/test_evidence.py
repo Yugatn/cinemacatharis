@@ -26,3 +26,21 @@ class EvidenceTests(unittest.TestCase):
         r=evidence_report([],source="empty",coverage="unknown")
         self.assertIsNone(r["content_safe"])
         self.assertIsNone(r["promotion_detected"])
+
+    def test_visual_channel_and_audio_transcript(self):
+        report = from_scan_capture({
+            "schema_version":"scan-1.0", "frames_examined":1,
+            "findings":[{"category":"alcohol","channel":"visual","start_ms":100,"end_ms":101,"confidence":0.7}],
+            "transcript":{"segments":[{"start_ms":200,"end_ms":900,"text":"A sample sentence"}]}
+        })
+        self.assertEqual(report["observation_count"],2)
+        self.assertEqual(report["observations"][0]["channel"],"image")
+        self.assertEqual(report["observations"][1]["channel"],"audio")
+        self.assertEqual(report["observations"][1]["timing_basis"],"unknown")
+        self.assertIsNone(report["observations"][1]["start"])
+        self.assertTrue(any("alignment" in item for item in report["limitations"]))
+
+    def test_invalid_transcript_timing(self):
+        with self.assertRaises(ValueError):
+            from_scan_capture({"schema_version":"scan-1.0","findings":[],
+                "transcript":{"segments":[{"start_ms":3,"end_ms":3,"text":"bad"}]}})
