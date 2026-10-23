@@ -72,7 +72,7 @@ def from_scan_capture(report):
         start, end = finding.get("start_ms"), finding.get("end_ms")
         rows.append({
             "category": finding.get("category"),
-            "channel": finding.get("channel", "image"),
+            "channel": {"visual": "image"}.get(finding.get("channel", "image"), finding.get("channel", "image")),
             "timing_basis": "capture_wall_clock",
             "start": start, "end": end,
             "confidence": finding.get("confidence"),
@@ -80,6 +80,24 @@ def from_scan_capture(report):
             "method": "scan_capture",
             "evidence": finding.get("evidence", ""),
         })
+    transcript = report.get("transcript")
+    if transcript is not None:
+        if not isinstance(transcript, dict) or not isinstance(transcript.get("segments"), list):
+            raise ValueError("Invalid transcript")
+        for segment in transcript["segments"]:
+            if not isinstance(segment, dict):
+                raise ValueError("Invalid transcript segment")
+            start, end = segment.get("start_ms"), segment.get("end_ms")
+            if type(start) is not int or type(end) is not int or start < 0 or end <= start:
+                raise ValueError("Invalid transcript timing")
+            rows.append({
+                "category": "speech_transcription", "channel": "audio",
+                "timing_basis": "unknown", "confidence": None,
+                "method": "faster_whisper_unverified",
+                "evidence": segment.get("text", ""),
+            })
     result = evidence_report(rows, source="screen_capture", coverage="sampled")
+    if transcript is not None:
+        result["limitations"].append("Speech transcription timestamps refer to the separate audio recording; alignment with capture wall clock is unknown")
     result["frames_examined"] = report.get("frames_examined", 0)
     return result
