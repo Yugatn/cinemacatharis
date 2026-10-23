@@ -9,11 +9,11 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 |---|---:|---:|---:|
 | Transparent taxonomy, composition and uncertainty metrics | 20% | 65% | 13% |
 | Text and browser extension prototype | 15% | 70% | 10.5% |
-| Image, audio and video pipeline integration | 20% | 55% | 11% |
+| Image, audio and video pipeline integration | 20% | 58% | 11.6% |
 | Desktop and mobile application distribution | 15% | 15% | 2.25% |
 | Parent preferences, privacy and family experience | 15% | 20% | 3% |
 | Testing, security, calibration and accessibility | 15% | 30% | 4.5% |
-| **Overall estimated readiness** | **100%** | | **44.25%** |
+| **Overall estimated readiness** | **100%** | | **44.85%** |
 
 ## Milestones
 - [x] Content composition with coverage and unknown intervals (research implementation).
@@ -35,9 +35,9 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 - [x] Enable local report viewer to open evidence-1.0 observations from any channel (read-only display).
 - [x] Normalize visual detector channel and preserve unaligned speech transcription as audio evidence in capture adapter.
 - [x] Add --evidence-output to capture CLI to export combined image and audio evidence-1.0 for local report viewer.
-- [ ] Integrate live OCR and video classification; capture export currently requires optional local ML dependencies.
+- [x] Implement privacy-preserving exact-byte media fingerprint index and unit tests (not robust audio matching).\n- [ ] Implement robust acoustic fingerprint matching and validate against transformed recordings.\n- [ ] Integrate live OCR and video classification; capture export currently requires optional local ML dependencies.
 - [ ] Independently validate classifiers with representative annotated data.
 - [ ] Build installable desktop and mobile browser applications.
 - [ ] Complete security, accessibility, performance and child-privacy audits.
 
-**Important:** 44.25% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
+**Important:** 44.85% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
