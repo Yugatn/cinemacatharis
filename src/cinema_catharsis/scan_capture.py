@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from .detectors import inspect_frames, transcribe_audio
 from .policy import analyze_document
+from .evidence import from_scan_capture
 
 def scan_capture(manifest_path: str, *, vision: bool = False, audio_path: str | None = None,
                  threshold: float = 0.55) -> dict:
@@ -54,6 +55,7 @@ def main():
     parser.add_argument("--audio", help="Captured audio file for optional Whisper transcription")
     parser.add_argument("--threshold", type=float, default=0.55)
     parser.add_argument("--output", help="Save JSON report")
+    parser.add_argument("--evidence-output", help="Save unified evidence-1.0 JSON report")
     parser.add_argument("--exports-dir", help="Also export XLSX, CSV and HTML reports")
     args = parser.parse_args()
     result = scan_capture(args.manifest, vision=args.vision,
@@ -63,6 +65,9 @@ def main():
         Path(args.output).write_text(output + "\n", encoding="utf-8")
     else:
         print(output)
+    if args.evidence_output:
+        unified = from_scan_capture(result)
+        Path(args.evidence_output).write_text(json.dumps(unified, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
     if args.exports_dir:
         from .export import export_csv, export_html, export_xlsx
         directory = Path(args.exports_dir)
