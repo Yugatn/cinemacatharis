@@ -67,7 +67,7 @@ def main():
         print(output)
     if args.evidence_output:
         unified = from_scan_capture(result)
-        Path(args.evidence_output).write_text(json.dumps(unified, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+        Path(args.evidence_output).write_text(json.dumps(unified, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if args.exports_dir:
         from .export import export_csv, export_html, export_xlsx
         directory = Path(args.exports_dir)
