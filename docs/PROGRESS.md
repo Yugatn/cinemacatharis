@@ -7,13 +7,13 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 
 | Workstream | Weight | Estimated completion | Contribution |
 |---|---:|---:|---:|
-| Transparent taxonomy, composition and uncertainty metrics | 20% | 65% | 13% |
+| Transparent taxonomy, composition and uncertainty metrics | 20% | 70% | 14% |
 | Text and browser extension prototype | 15% | 70% | 10.5% |
 | Image, audio and video pipeline integration | 20% | 73% | 14.6% |
 | Desktop and mobile application distribution | 15% | 15% | 2.25% |
 | Parent preferences, privacy and family experience | 15% | 20% | 3% |
-| Testing, security, calibration and accessibility | 15% | 35% | 5.25% |
-| **Overall estimated readiness** | **100%** | | **48.6%** |
+| Testing, security, calibration and accessibility | 15% | 40% | 6% |
+| **Overall estimated readiness** | **100%** | | **50.35%** |
 
 ## Milestones
 - [x] Content composition with coverage and unknown intervals (research implementation).
@@ -28,7 +28,8 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 - [x] Verify CI passed on commit 786795f7abf67d4575818a78cc6bbffe1f88a202.
 - [x] Verify Python and browser workflows passed on commit ff66d3170cf3ff0f8c20d128bdd9954d5591049f.
 - [x] Verify both workflows passed on commit 9bdfc8489c1b6352493dc45e23360920066394da.
-- [ ] Verify CI for acoustic catalog changes.
+- [x] Verify Python and browser workflows passed on commit 4e1aba338cb853b27262e1beb1a7b0190747d241.
+- [ ] Verify CI for new human-review record tests.
 - [x] Add common evidence normalization schema and screen-capture adapter (integration foundation only).
 - [x] Add lexical-to-evidence adapter for reports with explicit character offsets.
 - [x] Upgrade web and Chromium lexical engines to lexical-composition-1.1 with text offsets and excerpts; tests committed.
@@ -41,10 +42,11 @@ These are **engineering planning estimates**, not measured reliability or AI cla
 - [x] Implement optional offline Chromaprint fingerprint extraction and strict equality baseline; unit tests added.
 - [x] Prototype offset-aware raw Chromaprint bit-agreement comparison and synthetic unit tests (uncalibrated).
 - [x] Add local acoustic candidate catalog linking similarity rankings to report references without automatic identity claims.
+- [x] Add separate, append-only manual identity review decisions (confirmed/rejected/uncertain), without promoting similarity to certainty.
 - [ ] Validate acoustic matching on transformed real recordings and calibrate thresholds.
 - [ ] Integrate live OCR and video classification; capture export currently requires optional local ML dependencies.
 - [ ] Independently validate classifiers with representative annotated data.
 - [ ] Build installable desktop and mobile browser applications.
 - [ ] Complete security, accessibility, performance and child-privacy audits.
 
-**Important:** 48.6% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
+**Important:** 50.35% is an estimated share of a defined MVP scope, not a promise of safety, an accuracy percentage, or a guarantee of delivery.
